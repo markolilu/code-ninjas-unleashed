@@ -1,0 +1,65 @@
+<!-- WEATHER WIDGET (paste this inside a div on index.html) -->
+<section class="weather-widget" aria-label="Weather widget">
+  <h2 class="weather-title">Weather</h2>
+
+  <div class="weather-controls">
+    <input
+      id="cityInput"
+      type="text"
+      placeholder="Enter city (e.g., London)"
+      autocomplete="off"
+    />
+    <button id="weatherBtn" type="button">Get weather</button>
+  </div>
+
+  <p id="weatherMsg" class="weather-msg" aria-live="polite"></p>
+
+  <article id="weatherCard" class="weather-card hidden">
+    <header class="weather-header">
+      <h3 id="weatherPlace" class="weather-place"></h3>
+      <p id="weatherTime" class="weather-time"></p>
+    </header>
+
+    <div class="weather-main">
+      <p class="weather-temp">
+        <span id="weatherTemp">--</span><span class="unit">°C</span>
+      </p>
+      <p id="weatherSummary" class="weather-summary"></p>
+    </div>
+
+    <div class="weather-details">
+      <div class="weather-row">
+        <span>Feels like</span>
+        <strong><span id="weatherFeels">--</span>°C</strong>
+      </div>
+
+      <div class="weather-row">
+        <span>Humidity</span>
+        <strong><span id="weatherHumidity">--</span>%</strong>
+      </div>
+
+      <div class="weather-row">
+        <span>Wind</span>
+        <strong><span id="weatherWind">--</span> km/h</strong>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- Optional minimal styles (remove if you already have CSS) -->
+<style>
+  .weather-widget { margin-top: 20px; padding: 14px; border: 1px solid #e6e6e6; border-radius: 12px; max-width: 520px; }
+  .weather-title { margin: 0 0 12px; }
+  .weather-controls { display: flex; gap: 10px; flex-wrap: wrap; }
+  .weather-controls input { padding: 10px; min-width: 240px; }
+  .weather-controls button { padding: 10px 14px; cursor: pointer; }
+  .weather-msg { margin: 10px 0 0; min-height: 18px; }
+  .weather-card { margin-top: 12px; padding: 12px; border: 1px solid #eee; border-radius: 12px; }
+  .weather-card.hidden { display: none; }
+  .weather-place { margin: 0; }
+  .weather-time { margin: 4px 0 0; color: #666; }
+  .weather-temp { font-size: 34px; font-weight: 700; margin: 10px 0 4px; }
+  .weather-summary { margin: 0; color: #444; }
+  .weather-details { margin-top: 12px; display: grid; gap: 8px; }
+  .weather-row { display: flex; justify-content: space-between; border-bottom: 1px dashed #eee; padding-bottom: 4px; }
+</style>
