@@ -89,6 +89,7 @@ async function fetchWeather(lat, lon) {
 }
 
 function render(geo, weather) {
+
   const c = weather.current;
 
   weatherPlace.textContent = `${geo.name}${geo.country ? ", " + geo.country : ""}`;
@@ -101,7 +102,10 @@ function render(geo, weather) {
   weatherHumidity.textContent = c.relative_humidity_2m;
   weatherWind.textContent = Math.round(c.wind_speed_10m);
 
+ 
   showCard();
+
+  
 }
 
 async function handleGetWeather() {
