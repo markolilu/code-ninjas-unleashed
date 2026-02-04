@@ -1,34 +1,34 @@
 document.getElementById("generateBtn").addEventListener("click", onFetchPokemon);
 
 
-// Getting the data from the Pokemon API
+// // Getting the data from the Pokemon API
 
-function onFetchPokemon() {
+// function onFetchPokemon() {
 
-    const type = document.getElementById("typeSelect").value;
+//     const type = document.getElementById("typeSelect").value;
 
-    const pokemonAPI = `https://pokeapi.co/api/v2/type/${type}/`
+//     const pokemonAPI = `https://pokeapi.co/api/v2/type/${type}/`
 
-    const display = document.getElementById("pokemonDisplay");
+//     const display = document.getElementById("pokemonDisplay");
 
-    fetch(pokemonAPI)
-    .then(response => response.json())
-    .then(data => {
+//     fetch(pokemonAPI)
+//     .then(response => response.json())
+//     .then(data => {
 
-        const foundPokemon = data.pokemon[0].pokemon;
+//         const foundPokemon = data.pokemon[0].pokemon;
 
-        fetch (foundPokemon.url)
-        .then(response => response.json())
-        .then(details => {
-            let types = [];
-            for (let i=0; i<details.types.length; i++){
-                types.push(details.types[i].type.name);
-            }
-            display.innerHTML = `<h1>${details.name}</h1>
-            <img src="${details.sprites.front_default}"/>`;
-        })
-})
-}
+//         fetch (foundPokemon.url)
+//         .then(response => response.json())
+//         .then(details => {
+//             let types = [];
+//             for (let i=0; i<details.types.length; i++){
+//                 types.push(details.types[i].type.name);
+//             }
+//             display.innerHTML = `<h1>${details.name}</h1>
+//             <img src="${details.sprites.front_default}"/>`;
+//         })
+// })
+// }
 
 
 // Pokemon types: fire, water, electric, grass, ice, fighting, poision, ground, flying, psychic, bug, rock, ghost, dragon, dark, steel, fairy
@@ -50,21 +50,63 @@ function onFetchPokemon() {
 
 
 
-
 // function getPokemonForWeather(weather){
-if (weather === "Clear") {
-    return "fire";
-} else if (weather === "Raining"){
-    return "water";
-} else if (weather === "Stormy"){
-    return "electric";
-} else if (weather === "Snowing"){
-    return "ice";
-} else if (weather === "Windy"){
-    return "flying";
-} else if (weather === "Volcanic Ash"){
-    return "dragon";
-} else {
-    return "normal";
-}
+// if (weather === "Clear") {
+//     return "fire";
+// } else if (weather === "Raining"){
+//     return "water";
+// } else if (weather === "Stormy"){
+//     return "electric";
+// } else if (weather === "Snowing"){
+//     return "ice";
+// } else if (weather === "Windy"){
+//     return "flying";
+// } else if (weather === "Volcanic Ash"){
+//     return "dragon";
+// } else {
+//     return "normal";
+// }
 
+
+
+function onFetchPokemon() {
+
+    const weather = document.getElementById("weatherSelect").value;
+
+    let type;
+
+    if (weather === "clear") {
+        type = "fire";
+    } else if (weather === "rain"){
+        type = "water";
+    } else if (weather === "thunderstorm"){
+        type = "electric";
+    } else if (weather === "snow"){
+        type = "ice";
+    } else {
+        type = "normal";
+    }
+
+    const pokemonAPI = `https://pokeapi.co/api/v2/type/${type}/`
+
+    const display = document.getElementById("pokemonDisplay");
+
+    fetch(pokemonAPI)
+    .then(response => response.json())
+    .then(data => {
+
+        const foundPokemon = data.pokemon[0].pokemon;
+
+        fetch (foundPokemon.url)
+        .then(response => response.json())
+        .then(details => {
+            let types = [];
+            for (let i=0; i<details.types.length; i++){
+                types.push(details.types[i].type.name);
+            }
+            display.innerHTML = `<h1>${details.name}</h1>
+            <img src="${details.sprites.front_default}"/>
+            <h2> pokemon type: ${types}`;
+        })
+})
+}
