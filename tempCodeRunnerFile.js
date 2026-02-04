@@ -1,8 +1,4 @@
-// Getting the data from the Pokemon API
-
-function onFetchPokemon() {
-
-    const pokemonNames = "https://pokeapi.co/api/v2/pokemon?limit=1350"
+const pokemonNames = "https://pokeapi.co/api/v2/pokemon?limit=1350"
 
     fetch(pokemonNames)
     .then(response => response.json())
@@ -25,14 +21,3 @@ function onFetchPokemon() {
         });
 
     }});
-}
-
-
-//Pokemon types: fire, water, electric, grass, ice, fighting, poision, ground, flying, psychic, bug, rock, ghost, dragon, dark, steel, fairy
-// fire = sunny
-// water = raining
-// stormy = electric
-// snowing = ice
-// windy = flying
-// volcano = dragon
-
