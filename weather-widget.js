@@ -15,6 +15,8 @@ const weatherFeels = document.getElementById("weatherFeels");
 const weatherHumidity = document.getElementById("weatherHumidity");
 const weatherWind = document.getElementById("weatherWind");
 
+const weatherTypeDisplay = document.getElementById("weatherType");
+
 function setMsg(text, isError = false) {
   weatherMsg.textContent = text;
   weatherMsg.style.color = isError ? "crimson" : "#333";
@@ -32,7 +34,7 @@ function cleanCity(s) {
   return s.trim();
 }
 
-function weatherCodeToText(code) {
+function xToText(code) {
   const map = {
     0: "Clear sky",
     1: "Mainly clear",
@@ -96,7 +98,7 @@ function render(geo, weather) {
   weatherTime.textContent = `Updated: ${c.time}`;
 
   weatherTemp.textContent = Math.round(c.temperature_2m);
-  weatherSummary.textContent = weatherCodeToText(c.weather_code);
+  weatherSummary.textContent = xToText(c.weather_code);
 
   weatherFeels.textContent = Math.round(c.apparent_temperature);
   weatherHumidity.textContent = c.relative_humidity_2m;
@@ -105,7 +107,9 @@ function render(geo, weather) {
   showCard();
 
   console.log(c.weather_code);
-  weatherToPokemonConvertor(c.weather_code);
+  let weatherType = weatherToPokemonConvertor(c.weather_code);
+
+  weatherTypeDisplay.textContent = weatherType;
 }
 
 async function handleGetWeather() {
@@ -154,32 +158,47 @@ if (!cityInput.value) cityInput.value = "London";
 function weatherToPokemonConvertor (weatherCode) {
   // Get Code Number
 
+    let x = weatherCode;
+    console.log(x);
+
   // switch/case for groups of numbers = same 'generic weather type'
-  switch (weatherCode) {
-    case (weatherCode < 2):
-      return "Sunny"
+  switch (true) {
 
-    case (weatherCode < 49):
-      return "Cloudy"
+    case (x < 2):
+      console.log("Sunny");
+      return "Sunny";
 
-    case (weatherCode < 58):
-      return "Drizzle"
+    case (x < 49):
+      console.log("Cloudy");
+      return "Cloudy";
 
-    case (weatherCode < 66):
-      return "Rain"
+    case (x < 58):
+      console.log("Drizzle");
+      return "Drizzle";
+
+    case (x < 66):
+      console.log("Rain");
+      return "Rain";
       
-    case (weatherCode < 78):
-      return "Snow"
+    case (x < 78):
+      console.log("Snow");
+      return "Snow";
 
-    case (weatherCode < 83):
-      return "Rain"
+    case (x < 83):
+      console.log("Rain");
+      return "Rain";
 
-    case (weatherCode < 87):
-      return "Snow"
+    case (x < 87):
+      console.log("Snow");
+      return "Snow";
 
-    case (weatherCode < 100):
-      return "Thunder and Lightning"
+    case (x < 100):
+      console.log("Thunder and Lightning");
+      return "Thunder and Lightning";
 
+    default:
+      console.log("weather not recognised");
+      return "weather not recognised";
   }
   // return a value = 'generic weather type' (grouped them together)
   // send the 'generic weather type' to POKE-Code
