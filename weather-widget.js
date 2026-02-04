@@ -102,10 +102,10 @@ function render(geo, weather) {
   weatherHumidity.textContent = c.relative_humidity_2m;
   weatherWind.textContent = Math.round(c.wind_speed_10m);
 
- 
   showCard();
 
-  
+  console.log(c.weather_code);
+  weatherToPokemonConvertor(c.weather_code);
 }
 
 async function handleGetWeather() {
@@ -149,3 +149,42 @@ cityInput.addEventListener("keydown", (e) => {
 
 
 if (!cityInput.value) cityInput.value = "London";
+
+
+function weatherToPokemonConvertor (weatherCode) {
+  // Get Code Number
+
+  // switch/case for groups of numbers = same 'generic weather type'
+  switch (weatherCode) {
+    case (weatherCode < 2):
+      return "Sunny"
+
+    case (weatherCode < 49):
+      return "Cloudy"
+
+    case (weatherCode < 58):
+      return "Drizzle"
+
+    case (weatherCode < 66):
+      return "Rain"
+      
+    case (weatherCode < 78):
+      return "Snow"
+
+    case (weatherCode < 83):
+      return "Rain"
+
+    case (weatherCode < 87):
+      return "Snow"
+
+    case (weatherCode < 100):
+      return "Thunder and Lightning"
+
+  }
+  // return a value = 'generic weather type' (grouped them together)
+  // send the 'generic weather type' to POKE-Code
+  // This can be converted here BUTT let catherine do her MAGICS on her end with conversion of weather to relevant Element Type of Pokeon
+  // therefore we both learn :))
+
+
+}
