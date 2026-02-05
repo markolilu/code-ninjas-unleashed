@@ -11,9 +11,18 @@
 
 <body>
     <header class="container-fluid border border-warning mb-5 p-3">
-        <div class="d-flex justify-content-center">
-            <h1>Weather and Pokemon</h1>
+        <div class="row d-flex justify-content-center">
+            <div class="col-2 d-flex justify-content-center">
+                <img src="assets/weather-icon.png" style="width: 100px; height: 100px;">
+            </div>
+            <div class="col-5 d-flex justify-content-center align-items-center text-center">
+                <h1>Weather and Pokemon</h1>
+            </div>
+            <div class="col-2 d-flex justify-content-center">
+                <img src="assets/pokeball-icon.png" style="width: 100px; height: 100px;">
+            </div>
         </div>
+        
     </header>
 
     <div class="container-fluid my-5">
@@ -39,7 +48,7 @@
 
         <div class="container-fluid my-5">
             <div class="row d-flex justify-content-around align-items-center border border-warning m-5 p-5">
-                <div class="col-3 d-flex justify-content-center border border-success p-5">
+                <div class="col-3 d-flex justify-content-center border border-success p-2">
                     <section class="weather-widget" aria-label="Weather widget">
                         <h2 class="weather-title">Weather</h2>
 
@@ -79,12 +88,13 @@
                         </article>
                     </section>
                 </div>
-                <div  class="col-3 d-flex justify-content-center border border-success p-5">
-                    <div>
-                        <p id="weatherType">Insert Weather Variable here</p>
+                <div  class="col-3 d-flex justify-content-center border border-success p-2">
+                    <div class="text-center">
+                        <p>The <span id="weatherType" class="fw-bold">--</span></p>
+                        <p>is being caused by...</p>
                     </div>
                 </div>
-                <div class="col-3 d-flex justify-content-center border border-success p-5">
+                <div class="col-3 d-flex justify-content-center border border-success p-2">
                     <div>
                         Pokemon-display
                     </div>
