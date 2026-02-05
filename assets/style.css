@@ -12,7 +12,7 @@
     font-style: normal;
     font-size: 100%;
     color: #000000;
-    text-shadow: 1px 1px 0px #ffffff, -1px -1px 0px #ffffff, 2px 2px 0px #000000, -2px -2px 0px #000000;
+    text-shadow: 1px 1px 0px #fbd743, -1px -1px 0px #fbd743, 2px 2px 0px #000000, -2px -2px 0px #000000;
 }
 
 
@@ -37,8 +37,20 @@ header .pokemon-text {
     font-size: 0.65em;
 }
 
-.question {
-    /* background-color: white !important; */
+body {
+    background-color: #fbd743;
+}
+
+header {
+    background-color: #363b81;
+    color: #fbd743;
+}
+
+.area-search {
+    background-color: #363b81;
+    color: #fbd743;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px #000000;
 }
 
 .main-content{
