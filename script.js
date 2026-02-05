@@ -1,19 +1,9 @@
-// Weather widget (Open-Meteo) — works with your HTML IDs
 
 const cityInput = document.getElementById("cityInput");
 const weatherBtn = document.getElementById("weatherBtn");
 const weatherMsg = document.getElementById("weatherMsg");
 
-const weatherCard = document.getElementById("weatherCard");
-const weatherPlace = document.getElementById("weatherPlace");
-const weatherTime = document.getElementById("weatherTime");
-
-const weatherTemp = document.getElementById("weatherTemp");
-const weatherSummary = document.getElementById("weatherSummary");
-
-const weatherFeels = document.getElementById("weatherFeels");
-const weatherHumidity = document.getElementById("weatherHumidity");
-const weatherWind = document.getElementById("weatherWind");
+const weatherSection = document.getElementById("weatherSection");
 
 const weatherTypeDisplay = document.getElementById("weatherType");
 
@@ -22,14 +12,6 @@ const pokemonDisplay = document.getElementById("pokemon-display");
 function setMsg(text, isError = false) {
   weatherMsg.textContent = text;
   weatherMsg.style.color = isError ? "crimson" : "#333";
-}
-
-function hideCard() {
-  weatherCard.classList.add("hidden");
-}
-
-function showCard() {
-  weatherCard.classList.remove("hidden");
 }
 
 function cleanCity(s) {
@@ -61,7 +43,6 @@ function xToText(code) {
   return map[code] ?? `Weather code: ${code}`;
 }
 
-// 1) City -> coordinates
 async function fetchGeo(city) {
   const url =
     "https://geocoding-api.open-meteo.com/v1/search" +
@@ -74,10 +55,9 @@ async function fetchGeo(city) {
   const data = await res.json();
   if (!data.results || data.results.length === 0) throw new Error("city_not_found");
 
-  return data.results[0]; // {name, latitude, longitude, country, ...}
+  return data.results[0];
 }
 
-// 2) Coordinates -> current weather
 async function fetchWeather(lat, lon) {
   const url =
     "https://api.open-meteo.com/v1/forecast" +
@@ -96,39 +76,69 @@ function render(geo, weather) {
 
   const c = weather.current;
 
-  weatherPlace.textContent = `${geo.name}${geo.country ? ", " + geo.country : ""}`;
-  weatherTime.textContent = `Updated: ${c.time}`;
+  weatherSection.innerHTML = `<article id="weatherCard" class="weather-card hidden text-center">
+                                <header class="weather-header">
+                                <h3 id="weatherPlace" class="weather-place">${geo.name}${geo.country ? ", " + geo.country : ""}</h3>
+                                <br>
+                                <p id="weatherTime" class="weather-time">Updated: ${c.time}</p>
+                                </header>
 
-  weatherTemp.textContent = Math.round(c.temperature_2m);
-  weatherSummary.textContent = xToText(c.weather_code);
+                                <div class="weather-main">
+                                <p class="weather-temp">
+                                    <span id="weatherTemp">${ Math.round(c.temperature_2m)}</span><span class="unit">°C</span>
+                                </p>
+                                <p id="weatherSummary" class="weather-summary">${xToText(c.weather_code)}</p>
+                                </div>
 
-  weatherFeels.textContent = Math.round(c.apparent_temperature);
-  weatherHumidity.textContent = c.relative_humidity_2m;
-  weatherWind.textContent = Math.round(c.wind_speed_10m);
+                                <div class="weather-details">
+                                <div class="weather-row">
+                                <span>Feels like</span>
+                                <strong><span id="weatherFeels">
+                                ${Math.round(c.apparent_temperature)}
+                                </span>°C</strong>
+                                </div>
 
-  showCard();
+                                <div class="weather-row">
+                                <span>Humidity</span>
+                                <strong><span id="weatherHumidity">
+                                ${c.relative_humidity_2m}</span>%</strong>
+                                </div>
 
-  console.log(c.weather_code);
-  let weatherType = weatherToPokemonConvertor(c.weather_code);
+                                <div class="weather-row">
+                                <span>Wind</span>
+                                <strong><span id="weatherWind"> ${Math.round(c.wind_speed_10m)}
+                                </span> km/h</strong>
+                                </div>
+                                </div>
+                                </article>`
 
-  weatherTypeDisplay.textContent = weatherType;
 
-  let pokemonType = weatherTypeToPokemonType(weatherType);
-  fetchPokemon(pokemonType);
+
+    const weatherCard = document.getElementById("weatherCard");
+    weatherCard.classList.remove("hidden");
+
+    console.log(c.weather_code);
+    let weatherType = weatherToPokemonConvertor(c.weather_code);
+
+
+    weatherTypeDisplay.innerHTML = `<div class="text-center">
+                        <p class="h5">The <span id="weatherType" class="h3">${weatherType}</span></p>
+                        <p class="h5">is being caused by...</p>
+                        </div>`
+
+    let pokemonType = weatherTypeToPokemonType(weatherType);
+    fetchPokemon(pokemonType);
 }
 
 async function handleGetWeather() {
   const city = cleanCity(cityInput.value);
 
-  // validation
   if (!city) {
     setMsg("Enter a city name.", true);
-    hideCard();
     return;
   }
 
   setMsg("Loading...");
-  hideCard();
   weatherBtn.disabled = true;
 
   try {
@@ -142,7 +152,6 @@ async function handleGetWeather() {
     } else {
       setMsg("Request failed. Check your internet and try again.", true);
     }
-    hideCard();
   } finally {
     weatherBtn.disabled = false;
   }
@@ -249,7 +258,7 @@ function fetchPokemon(type){
             }
             pokemonDisplay.innerHTML = `<h1>${details.name}</h1>
             <img src="${details.sprites.front_default}"/>
-            <h2> pokemon type: ${types}`;
+            <h2> Pokemon Type: ${types}`;
         })
 })
 }
