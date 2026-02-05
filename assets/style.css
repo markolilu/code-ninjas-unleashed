@@ -37,3 +37,15 @@ header .pokemon-text {
     font-size: 0.65em;
 }
 
+.question {
+    /* background-color: white !important; */
+}
+
+.main-content{
+    background-color: #363b81;
+    color: #fbd743;
+}
+
+.pokemonImage{
+    width:8vw;
+}

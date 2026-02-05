@@ -257,8 +257,8 @@ function fetchPokemon(type){
                 types.push(details.types[i].type.name);
             }
             pokemonDisplay.innerHTML = `<h1>${details.name}</h1>
-            <img src="${details.sprites.front_default}"/>
-            <h2> Pokemon Type: ${types}`;
+            <img src="${details.sprites.other["official-artwork"].front_default}" class = "pokemonImage"/>
+            <h2> <span class="h5"> Pokemon Type: </span> ${types.join(", ")}`;
         })
 })
 }
