@@ -123,7 +123,7 @@ function render(geo, weather) {
 
     weatherTypeDisplay.innerHTML = `<div class="text-center">
                         <p class="h5">The <span id="weatherType" class="h3">${weatherType}</span></p>
-                        <p class="h5">is being caused by...</p>
+                        <p class="h5 pokemon-text">is being caused by...</p>
                         </div>`
 
     let pokemonType = weatherTypeToPokemonType(weatherType);
@@ -256,7 +256,7 @@ function fetchPokemon(type){
             for (let i=0; i<details.types.length; i++){
                 types.push(details.types[i].type.name);
             }
-            pokemonDisplay.innerHTML = `<h1>${details.name}</h1>
+            pokemonDisplay.innerHTML = `<h1  class="pokemon-text">${details.name}</h1>
             <img src="${details.sprites.other["official-artwork"].front_default}" class = "pokemonImage"/>
             <h2> <span class="h5"> Pokemon Type: </span> ${types.join(", ")}`;
         })
